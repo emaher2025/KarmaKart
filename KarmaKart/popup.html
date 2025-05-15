@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Price Extractor</title>
+  <style>
+    html, body {
+      width: 400px;
+      height: 230px; /* Slightly reduced height */
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      overflow: hidden; /* Prevent scrolling */
+    }
+    
+    .popup-container {
+      width: 100%;
+      height: 100%;
+      border: none;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .main-content {
+      display: flex;
+      flex: 1;
+      padding: 10px;
+      background-color: #000000;
+    }
+    
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 3px;
+      width: 50%;
+      align-items: center; /* Align items vertically */
+      justify-content: center; /* Align items horizontally */
+      background-color: #000000;
+    }
+    
+    .grid-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s;
+      opacity: 0; /* Start with invisible images */
+      animation-fill-mode: forwards; /* Keep final state */
+    }
+    
+    .grid-image:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Fade-in animation for images */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .info-panel {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Changed from center to flex-start to move content up */
+      align-items: center;
+      padding: 30px 10px 0 10px; /* Added top padding to move content up */
+    }
+    
+    .impact-section {
+      text-align: center;
+      margin-bottom: 20px; /* Space between text and button */
+      width: 100%; /* Ensure full width */
+    }
+    
+    #impact-display {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 15px;
+      border: 1px solid #000000;
+      border-radius: 6px;
+      text-align: center;
+      background-color: #040404;
+      color: #fffdfd;
+      line-height: 1.4;
+      width: 100%;
+      box-sizing: border-box;
+      /* Animation for the entire text block */
+      opacity: 0;
+      animation: fadeIn 0.8s forwards; /* Slower fade-in */
+      animation-delay: 1.8s; /* Longer delay after images start appearing */
+    }
+    
+    .controls-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      /* Removed padding-bottom since it's now part of the info-panel */
+      background-color: #000000;
+      opacity: 0; /* Start with invisible button */
+      animation: fadeIn 0.8s forwards; /* Slower fade-in */
+      animation-delay: 2.2s; /* Longer delay after text appears */
+    }
+    
+    .button-row {
+      width: 100%;
+      display: flex;
+      justify-content: center; /* Center the button */
+    }
+    
+    .google-link {
+      display: block;
+      text-decoration: none;
+      color: #FFFFFF; /* White text */
+      font-weight: 500;
+      transition: all 0.2s;
+      padding: 10px 30px; /* Larger button size */
+      background-color: #FF0000; /* Red fill */
+      border: 2px solid #FF0000; /* Red border matching the background */
+      box-shadow: inset 0 0 0 2px #FFFFFF; /* White inner border */
+      border-radius: 4px;
+      font-size: 16px; /* Larger text */
+      text-align: center;
+    }
+    
+    .google-link:hover {
+      background-color: #CC0000; /* Darker red on hover */
+      border-color: #CC0000;
+      color: #FFFFFF;
+    }
+    
+    .highlight {
+      color: #FF0000; /* Red highlight */
+      font-size: 18px; /* Larger font size */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <div class="main-content">
+      <!-- Left side: Grid of 20 images (4x5) -->
+      <div class="image-grid">
+        <!-- Generate 20 image placeholders (4 columns x 5 rows) -->
+        <img class="grid-image" src="images/price-icon.png" alt="Image 1">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 2">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 3">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 4">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 5">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 6">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 7">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 8">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 9">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 10">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 11">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 12">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 13">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 14">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 15">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 16">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 17">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 18">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 19">
+        <img class="grid-image" src="images/price-icon.png" alt="Image 20">
+      </div>
+      
+      <!-- Right side: Impact display and donate button moved inside info-panel -->
+      <div class="info-panel">
+        <div class="impact-section">
+          <div id="impact-display">Scanning page...</div>
+        </div>
+        
+        <!-- Donate button moved here, directly below the text -->
+        <div class="controls-section">
+          <div class="button-row">
+            <a href="https://www.savethechildren.net/donate/donate-now-save-lives-sr-search" class="google-link" target="_blank">Donate Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
